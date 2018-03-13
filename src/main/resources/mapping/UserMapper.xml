@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.dao.UserDao" >
+  <resultMap id="BaseResultMap" type="com.example.demo.pojo.User" >
+    <constructor >
+      <idArg column="uid" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="username" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="name" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="password" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="salt" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="state" jdbcType="CHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    uid, username, name, password, salt, state
+  </sql>
+
+  <select id="findUserByName" resultMap="BaseResultMap" parameterType="java.lang.String">
+     select <include refid="Base_Column_List"/>
+      from user_info where username=#{userName,jdbcType=CHAR}
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_info
+    where uid = #{uid,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from user_info
+    where uid = #{uid,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.example.demo.pojo.User" >
+    insert into user_info (uid, username, name, password, 
+      salt, state)
+    values (#{uid,jdbcType=CHAR}, #{username,jdbcType=CHAR}, #{name,jdbcType=CHAR}, #{password,jdbcType=CHAR}, 
+      #{salt,jdbcType=CHAR}, #{state,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.demo.pojo.User" >
+    insert into user_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="salt != null" >
+        salt,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uid != null" >
+        #{uid,jdbcType=CHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=CHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=CHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=CHAR},
+      </if>
+      <if test="salt != null" >
+        #{salt,jdbcType=CHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.pojo.User" >
+    update user_info
+    <set >
+      <if test="username != null" >
+        username = #{username,jdbcType=CHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=CHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=CHAR},
+      </if>
+      <if test="salt != null" >
+        salt = #{salt,jdbcType=CHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=CHAR},
+      </if>
+    </set>
+    where uid = #{uid,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.pojo.User" >
+    update user_info
+    set username = #{username,jdbcType=CHAR},
+      name = #{name,jdbcType=CHAR},
+      password = #{password,jdbcType=CHAR},
+      salt = #{salt,jdbcType=CHAR},
+      state = #{state,jdbcType=CHAR}
+    where uid = #{uid,jdbcType=CHAR}
+  </update>
+</mapper>
