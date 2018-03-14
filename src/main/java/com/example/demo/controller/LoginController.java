@@ -4,11 +4,14 @@ import com.example.demo.pojo.User;
 import com.example.demo.service.Imp.UserServiceImp;
 import com.example.demo.service.UserSerevice;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.annotation.Resource;
 
 /**
  * Created by lenovo on  十二月
@@ -16,10 +19,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class LoginController {
     /**
-     * 为什么这里不用UserService接口注入呢？总是报错存在两个bean
+     * 这里的注解运用了自动装配@Autowired和指定名称@Qualifier，效果相当于@Resource(name = "userServiceImpl")
      */
    @Autowired
-    private UserServiceImp userService;
+   @Qualifier("userServiceImp")
+    private UserSerevice userService;
 
     @RequestMapping(value="/index",method = RequestMethod.GET)
     public String index() {

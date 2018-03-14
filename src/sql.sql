@@ -47,6 +47,7 @@ INSERT INTO `sys_role_permission` (`permission_id`,`role_id`) VALUES (1,1);
 INSERT INTO `sys_role_permission` (`permission_id`,`role_id`) VALUES (1,2);
 INSERT INTO `sys_role_permission` (`permission_id`,`role_id`) VALUES (1,3);
 INSERT INTO `sys_user_role` (`role_id`,`uid`) VALUES (1,1);
-INSERT INTO `user_info` (`uid`,`username`,`name`,`password`,`salt`,`state`) VALUES ('1', 'admin', '管理员', '1', '8d78869f470951332959580424d4bf4f', 0);
+INSERT INTO `user_info` (`uid`,`username`,`name`,`password`,`salt`,`state`) VALUES ('1', 'admin', '管理员', '123456', '8d78869f470951332959580424d4bf4f', 0);
+INSERT INTO `user_info` (`uid`,`username`,`name`,`password`,`salt`,`state`) VALUES ('2', 'staff', '职工', '123456', ' ', 0);
 
 
