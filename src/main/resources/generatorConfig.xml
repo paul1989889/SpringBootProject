@@ -82,5 +82,15 @@
            enableDeleteByExample="false" enableSelectByExample="false"
            selectByExampleQueryId="false">
     </table>
+    <table tableName="sys_user_role" domainObjectName="SysUserRole"
+           enableCountByExample="false" enableUpdateByExample="false"
+           enableDeleteByExample="false" enableSelectByExample="false"
+           selectByExampleQueryId="false">
+    </table>
+    <table tableName="sys_role_permission" domainObjectName="SysRolePermission"
+           enableCountByExample="false" enableUpdateByExample="false"
+           enableDeleteByExample="false" enableSelectByExample="false"
+           selectByExampleQueryId="false">
+    </table>
 </context>
 </generatorConfiguration>

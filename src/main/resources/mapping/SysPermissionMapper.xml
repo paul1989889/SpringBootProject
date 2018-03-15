@@ -16,7 +16,7 @@
   <sql id="Base_Column_List" >
     id, available, name, parent_id, parent_ids, permission, resource_type, url
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="findPermissionById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from sys_permission

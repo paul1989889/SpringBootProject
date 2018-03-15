@@ -15,11 +15,14 @@
     uid, username, name, password, salt, state
   </sql>
 
-  <select id="findUserByName" resultMap="BaseResultMap" parameterType="java.lang.String">
-     select <include refid="Base_Column_List"/>
-      from user_info where username=#{userName,jdbcType=CHAR}
+  <select id="findIdByUserName" resultType="java.lang.Integer" parameterType="java.lang.String" >
+      select uid  from user_info where username=#{userName }
   </select>
 
+  <select id="findUserByUserName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select  <include refid="Base_Column_List" />
+    from user_info where username=#{userName }
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />

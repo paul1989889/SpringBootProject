@@ -41,7 +41,12 @@
 			<artifactId>mybatis-spring-boot-starter</artifactId>
 			<version>1.0.0</version>
 		</dependency>
-
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-test</artifactId>
+			<version>1.4.0.RELEASE</version>
+			<scope>test</scope>
+		</dependency>
 		<!-- 访问jsp页面所需要的以下依赖包 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -87,6 +92,15 @@
 			<groupId>org.apache.shiro</groupId>
 			<artifactId>shiro-core</artifactId>
 			<version>1.2.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-test</artifactId>
 		</dependency>
 	</dependencies>
 

@@ -9,7 +9,7 @@ public interface SysPermissionDao {
 
     int insertSelective(SysPermission record);
 
-    SysPermission selectByPrimaryKey(Integer id);
+    SysPermission findPermissionById(int id);
 
     int updateByPrimaryKeySelective(SysPermission record);
 

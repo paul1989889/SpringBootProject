@@ -9,9 +9,11 @@ public interface SysRoleDao {
 
     int insertSelective(SysRole record);
 
-    SysRole selectByPrimaryKey(Integer id);
+    SysRole selectByPrimaryKey(int id);
 
     int updateByPrimaryKeySelective(SysRole record);
 
     int updateByPrimaryKey(SysRole record);
+
+    String findRoleByRoleId(int roleId);
 }
