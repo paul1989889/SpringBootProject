@@ -29,4 +29,28 @@ public class SysUserRole {
     public void setUid(Integer uid) {
         this.uid = uid;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o){
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        SysUserRole that = (SysUserRole) o;
+
+        if (!roleId.equals(that.roleId)){
+            return false;
+        }
+        return uid.equals(that.uid);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = roleId.hashCode();
+        result = 31 * result + uid.hashCode();
+        return result;
+    }
 }

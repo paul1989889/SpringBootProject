@@ -2,6 +2,7 @@ package com.example.demo.service.Imp;
 
 import com.example.demo.dao.*;
 import com.example.demo.pojo.SysPermission;
+import com.example.demo.pojo.SysUserRole;
 import com.example.demo.pojo.User;
 import com.example.demo.service.UserSerevice;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,12 +45,12 @@ public class UserServiceImp implements UserSerevice {
     }
 
     @Override
-    public Set findRoleIdByUid(int uid) {
+    public Set<SysUserRole> findRoleIdByUid(int uid) {
         return userRoleDao.findRoleIdByUid(uid);
     }
 
     @Override
-    public int findPermissionIdByRoleId(int roleId) {
+    public Set<Integer> findPermissionIdByRoleId(int roleId) {
         return rolePermissionDao.findPermissionIdByRoleId(roleId);
     }
 

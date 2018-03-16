@@ -33,7 +33,6 @@ public class LoginController {
     @RequestMapping(value = "/user",method = RequestMethod.GET)
     public User findUserByName(String name){
         User user =userService.findUserByName(name);
-
         return user;
     }
 

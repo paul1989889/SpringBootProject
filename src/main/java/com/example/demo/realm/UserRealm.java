@@ -1,6 +1,7 @@
 package com.example.demo.realm;
 
 import com.example.demo.pojo.SysPermission;
+import com.example.demo.pojo.SysUserRole;
 import com.example.demo.pojo.User;
 import com.example.demo.service.UserSerevice;
 import com.example.demo.utils.State;
@@ -36,13 +37,15 @@ public class UserRealm extends AuthorizingRealm {
         SimpleAuthorizationInfo authorizationInfo=new SimpleAuthorizationInfo();
         String userName=(String) principals.getPrimaryPrincipal();
         String userId=userSerevice.findUserIdByName(userName);
-        Set<Integer> roleIdSet=userSerevice.findRoleIdByUid( Integer.parseInt(userId) );
+        Set<SysUserRole> roleIdSet=userSerevice.findRoleIdByUid( Integer.parseInt(userId) );
         Set<String> roleSet=new HashSet<>();
         Set<Integer>  pemissionIdSet=new HashSet<>();
         Set<String>  pemissionSet=new HashSet<>();
-        for(int roleId : roleIdSet) {
-              roleSet.add( userSerevice.findRoleByRoleId(roleId) );
-              pemissionIdSet.add( userSerevice.findPermissionIdByRoleId(roleId));
+        for(SysUserRole roleInfo : roleIdSet) {
+              int roleId=roleInfo.getRoleId();
+               roleSet.add( userSerevice.findRoleByRoleId( roleId  ) );
+               //将拥有角色的所有权限放进Set里面，也就是求Set集合的并集
+              pemissionIdSet.addAll( userSerevice.findPermissionIdByRoleId(  roleId ));
         }
         for(int permissionId : pemissionIdSet) {
             pemissionSet.add(  userSerevice.findPermissionById(permissionId).getName());

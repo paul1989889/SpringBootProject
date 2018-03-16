@@ -1,8 +1,10 @@
 一.收获
 1.熟悉一下SpringBoot;
 2.加强SSM的理解
+3.加强单元测试的运用，断言,配合SpringBoot的注解
+
 一.待添加功能：
-1.Shiro框架
+1.Shiro框架,MD5加密
 2.后端模板freemaker等
 二.遇到的障碍：
 1.Mybatis找不到生成的Mapper对应的Class文件，需要配置Mybatis属性

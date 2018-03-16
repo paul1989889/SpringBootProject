@@ -1,5 +1,8 @@
 package test.com.example.demo.service.Imp; 
 
+import com.example.demo.SpringBootDemoApplication;
+import com.example.demo.pojo.SysRole;
+import com.example.demo.pojo.SysUserRole;
 import com.example.demo.pojo.User;
 import com.example.demo.service.Imp.UserServiceImp;
 import com.example.demo.service.UserSerevice;
@@ -9,11 +12,17 @@ import org.junit.After;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 
 import javax.annotation.Resource;
+import java.util.Set;
+
+import static org.junit.Assert.assertEquals;
 
 /** 
 * UserServiceImp Tester. 
@@ -23,15 +32,14 @@ import javax.annotation.Resource;
 * @version 1.0 
 */
 @RunWith(SpringJUnit4ClassRunner.class)
-//@SpringBootTest()
+@SpringBootTest(classes = SpringBootDemoApplication.class)
 public class UserServiceImpTest {
 
-//    @Autowired
-//    @Qualifier("userServiceImp")
     @Resource(name = "userServiceImp")
     private UserSerevice userService;
 
     private String userName="admin";
+    private String id="1";
 
 @Before
 public void before() throws Exception {
@@ -61,7 +69,9 @@ public void testFindUserByName() throws Exception {
 */ 
 @Test
 public void testShowUsers() throws Exception { 
-//TODO: Test goes here... 
+//TODO: Test goes here...
+    User user= userService.showUsers("1");
+    System.out.println(user.toString());
 } 
 
 /** 
@@ -71,7 +81,9 @@ public void testShowUsers() throws Exception {
 */ 
 @Test
 public void testFindUserIdByName() throws Exception { 
-//TODO: Test goes here... 
+//TODO: Test goes here...
+    User user= userService.showUsers(userName);
+    System.out.println(user.toString());
 } 
 
 /** 
@@ -81,7 +93,11 @@ public void testFindUserIdByName() throws Exception {
 */ 
 @Test
 public void testFindRoleIdByUid() throws Exception { 
-//TODO: Test goes here... 
+//TODO: Test goes here...
+    Set<SysUserRole> roleSet= userService.findRoleIdByUid(1);
+    for(SysUserRole role : roleSet) {
+        System.out.println(role.getRoleId());
+    }
 } 
 
 /** 
@@ -91,7 +107,12 @@ public void testFindRoleIdByUid() throws Exception {
 */ 
 @Test
 public void testFindPermissionIdByRoleId() throws Exception { 
-//TODO: Test goes here... 
+//TODO: Test goes here...
+
+    Set<Integer>  permissionSet=userService.findPermissionIdByRoleId(2);
+    for(int permissionId : permissionSet) {
+        System.out.println(permissionId);
+    }
 } 
 
 /** 
@@ -101,7 +122,9 @@ public void testFindPermissionIdByRoleId() throws Exception {
 */ 
 @Test
 public void testFindRoleByRoleId() throws Exception { 
-//TODO: Test goes here... 
+//TODO: Test goes here...
+
+    assertEquals(  "vip" ,userService.findRoleByRoleId(2));
 } 
 
 /** 
@@ -111,7 +134,8 @@ public void testFindRoleByRoleId() throws Exception {
 */ 
 @Test
 public void testFindPermissionById() throws Exception { 
-//TODO: Test goes here... 
+//TODO: Test goes here...
+    System.out.println(  userService .findPermissionById(1).getPermission()   );
 } 
 
 
