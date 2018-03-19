@@ -1,4 +1,4 @@
-package com.example.demo.realm;
+package com.example.demo.config;
 
 import com.example.demo.pojo.SysPermission;
 import com.example.demo.pojo.SysUserRole;
@@ -77,7 +77,7 @@ public class UserRealm extends AuthorizingRealm {
            throw new  LockedAccountException();
         }
         //此处的密码盐需要修复
-        SimpleAuthenticationInfo authenticationInfo=new SimpleAuthenticationInfo(user.getUsername(),user.getPassword(), null,getName());
+        SimpleAuthenticationInfo authenticationInfo=new SimpleAuthenticationInfo(user.getUsername(),user.getPassword(),getName());
 
         return authenticationInfo;
     }

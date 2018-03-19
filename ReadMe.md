@@ -11,3 +11,5 @@
 2.Spring依赖注入，@Autowired和@Resource的细节
 3.网址中Url的参数，取的值是等号后面的内容，包括引号在内。
 比如，http://localhost:8080/user?name=admin
+4.@Configuration和@Bean
+5.html获取request中的attribute值
