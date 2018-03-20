@@ -22,7 +22,6 @@ import javax.annotation.Resource;
 //@RestController
 @Controller
 public class LoginController {
-
     @Resource(name="userServiceImp")
     private UserSerevice userSerevice;
 

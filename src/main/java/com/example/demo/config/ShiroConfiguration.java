@@ -36,7 +36,7 @@ public class ShiroConfiguration {
         shiroFilterFactoryBean.setFilters(filterMap);
         //权限控制map
         Map<String,String> filterChainDefinitionMap=new LinkedHashMap<>();
-//        // 配置不会被拦截的链接 顺序判断
+        // 配置不会被拦截的链接 顺序判断
 //        filterChainDefinitionMap.put("/static/**", "anon");
 //        //配置退出 过滤器,其中的具体的退出代码Shiro已经替我们实现了
 //        filterChainDefinitionMap.put("/logout", "logout");
@@ -53,10 +53,22 @@ public class ShiroConfiguration {
     public SecurityManager securityManager(){
          DefaultWebSecurityManager securityManager=new DefaultWebSecurityManager ();
          //设置realm
-         securityManager.setRealm( new UserRealm());
+         securityManager.setRealm( myShiroRealm()  );
          securityManager.setRememberMeManager(rememberMeManager());
          return securityManager;
      }
+
+
+    /**
+     * 身份认证Realm，此处的注入不可以缺少。否则会在UserRealm中注入对象会报空指针.
+     * @return
+     */
+    @Bean
+    public UserRealm myShiroRealm(){
+        UserRealm myShiroRealm = new UserRealm();
+        return myShiroRealm;
+    }
+
 
     /**
      * 记住我管理器

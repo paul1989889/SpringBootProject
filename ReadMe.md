@@ -15,4 +15,5 @@
 4.@Configuration和@Bean    <br>
 5.html如何获取后台request中的attribute值?可以通过模板引擎获取    <br>
 6.注意@RestController和@Controller的区别，@RestController返回字符串时会直接显示文本，而不是跳转到对应的页面     <br>
-7.UserRealm中注入service对象报空指针  <br>
+7.UserRealm中注入service对象报空指针?原因是在ShiroConfig中，没有注入realm  <br>
+8.shiro过滤器filterChainDefinitionMap，具体如何配置？   <br>
