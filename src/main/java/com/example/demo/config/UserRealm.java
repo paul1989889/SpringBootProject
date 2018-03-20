@@ -27,6 +27,7 @@ public class UserRealm extends AuthorizingRealm {
     @Resource(name = "userServiceImp")
     private UserSerevice userSerevice;
 
+
     /**
      * 提供用户信息，返回权限信息
      * @param principals

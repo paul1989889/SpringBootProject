@@ -1,10 +1,10 @@
 package com.example.demo.config;
 
 
-import org.apache.shiro.mgt.DefaultSecurityManager;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.CookieRememberMeManager;
+import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.servlet.Cookie;
 import org.apache.shiro.web.servlet.SimpleCookie;
 import org.springframework.context.annotation.Bean;
@@ -51,7 +51,7 @@ public class ShiroConfiguration {
 
      @Bean
     public SecurityManager securityManager(){
-         DefaultSecurityManager securityManager=new DefaultSecurityManager();
+         DefaultWebSecurityManager securityManager=new DefaultWebSecurityManager ();
          //设置realm
          securityManager.setRealm( new UserRealm());
          securityManager.setRememberMeManager(rememberMeManager());

@@ -25,10 +25,6 @@ public class UserController {
    @Qualifier("userServiceImp")
     private UserSerevice userService;
 
-    @RequestMapping(value="/index",method = RequestMethod.GET)
-    public String index() {
-        return "index";
-    }
 
     @RequestMapping(value = "/user",method = RequestMethod.GET)
     public User findUserByName(String name){
