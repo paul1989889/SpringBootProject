@@ -5,6 +5,7 @@ import com.example.demo.pojo.SysUserRole;
 import com.example.demo.pojo.User;
 import com.example.demo.service.UserSerevice;
 import com.example.demo.utils.State;
+import org.apache.log4j.Logger;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
@@ -27,6 +28,7 @@ public class UserRealm extends AuthorizingRealm {
     @Resource(name = "userServiceImp")
     private UserSerevice userSerevice;
 
+    private Logger logger=Logger.getLogger(UserRealm.class);
 
     /**
      * 提供用户信息，返回权限信息
@@ -35,6 +37,7 @@ public class UserRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
+        logger.info("--->授权认证：");
         SimpleAuthorizationInfo authorizationInfo=new SimpleAuthorizationInfo();
         String userName=(String) principals.getPrimaryPrincipal();
         String userId=userSerevice.findUserIdByName(userName);
@@ -67,6 +70,7 @@ public class UserRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
+        logger.info("----->登陆验证:");
         String userName=(String)authenticationToken.getPrincipal();
         User user=userSerevice.findUserByName(userName);
         if(user==null) {

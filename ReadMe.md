@@ -21,3 +21,4 @@
 6.注意@RestController和@Controller的区别，@RestController返回字符串时会直接显示文本，而不是跳转到对应的页面     <br>
 7.UserRealm中注入service对象报空指针?原因是在ShiroConfig中，没有注入realm  <br>
 8.shiro过滤器filterChainDefinitionMap，具体如何配置？   <br>
+9.shiro的注解@RequiresRoles("admin")不起作用，非管理员怎么也可以登陆？
