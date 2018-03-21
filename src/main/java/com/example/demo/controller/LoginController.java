@@ -25,16 +25,25 @@ public class LoginController {
     @Resource(name="userServiceImp")
     private UserSerevice userSerevice;
 
+    /**
+     * 跳转到/login.html页面
+     * @return
+     */
     @RequestMapping(value="/index",method = RequestMethod.GET)
     public String index() {
         return "/login";
     }
 
+    /**
+     *  登陆认证，检查账号密码是否正确。成功则跳转到index.html，错误则跳转到对应的error.html
+     * @param userName
+     * @param password
+     * @param model
+     * @return
+     */
     @RequestMapping(value="/login",method = RequestMethod.GET)
     public String login(@RequestParam("userName")String userName, @RequestParam("password") String password, Model model){
-        System.out.println("---->进入登陆方法内：");
         UsernamePasswordToken usernamePasswordToken=new UsernamePasswordToken(userName,password);
-        //这里有bug，取到的subject总是空的。。
         Subject subject=SecurityUtils.getSubject();
 
         try {
@@ -49,7 +58,7 @@ public class LoginController {
             model.addAttribute("error","time error");
             return "error";
         }
-        return "login";
+        return "index";
     }
 
 }

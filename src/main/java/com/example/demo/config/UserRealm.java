@@ -77,7 +77,7 @@ public class UserRealm extends AuthorizingRealm {
            //用户被锁定就抛异常
            throw new  LockedAccountException();
         }
-        //此处的密码盐需要修复
+        //此处的密码盐需要修复,不加入密码盐表示密码用明文
         SimpleAuthenticationInfo authenticationInfo=new SimpleAuthenticationInfo(user.getUsername(),user.getPassword(),getName());
 
         return authenticationInfo;
