@@ -15,7 +15,7 @@ public interface UserDao {
 
     int updateByPrimaryKey(User record);
 
-    String findUserIdByName(String userName);
+    String findIdByUserName(String userName);
 
     User findUserByUserName(String userName);
 }

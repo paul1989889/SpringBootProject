@@ -102,7 +102,7 @@ public class ShiroConfiguration {
 
     /**
      *  开启shiro aop注解支持.
-     *  使用代理方式;所以需要开启代码支持;
+     *  使用代理方式;所以需要开启代码支持;否则@RequiresRoles注解无法生效
      * @param securityManager
      * @return
      */
@@ -113,5 +113,20 @@ public class ShiroConfiguration {
         return authorizationAttributeSourceAdvisor;
     }
 
+    /**
+     * Shiro生命周期处理器
+     * @return
+     */
+    @Bean
+    public LifecycleBeanPostProcessor lifecycleBeanPostProcessor(){
+        return new LifecycleBeanPostProcessor();
+    }
 
+    @Bean
+    @DependsOn({"lifecycleBeanPostProcessor"})
+    public DefaultAdvisorAutoProxyCreator advisorAutoProxyCreator(){
+        DefaultAdvisorAutoProxyCreator advisorAutoProxyCreator = new DefaultAdvisorAutoProxyCreator();
+        advisorAutoProxyCreator.setProxyTargetClass(true);
+        return advisorAutoProxyCreator;
+    }
 }

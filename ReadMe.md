@@ -8,8 +8,8 @@
 一.待添加功能：    <br>
 1.Shiro框架,MD5加密    <br>
 2.后端模板freemaker、Thymeleaf等    <br>
-3.集成redis缓存.
-
+3.集成redis缓存.   <br>
+4.添加mybatis的日志.   <br>
 二.遇到的障碍：    <br>
 1.Mybatis找不到生成的Mapper对应的Class文件，需要配置Mybatis属性    <br>
 2.Spring依赖注入，@Autowired和@Resource的细节 .@Autowired按类型注入，@Resource按名称注入   <br>

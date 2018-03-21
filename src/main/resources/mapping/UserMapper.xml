@@ -15,7 +15,7 @@
     uid, username, name, password, salt, state
   </sql>
 
-  <select id="findIdByUserName" resultType="java.lang.Integer" parameterType="java.lang.String" >
+  <select id="findIdByUserName" resultType="java.lang.String" parameterType="java.lang.String" >
       select uid  from user_info where username=#{userName }
   </select>
 
@@ -23,6 +23,7 @@
     select  <include refid="Base_Column_List" />
     from user_info where username=#{userName }
   </select>
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />

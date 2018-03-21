@@ -82,8 +82,8 @@ public void testShowUsers() throws Exception {
 @Test
 public void testFindUserIdByName() throws Exception { 
 //TODO: Test goes here...
-    User user= userService.showUsers(userName);
-    System.out.println(user.toString());
+    String userId= userService.findUserIdByName(userName);
+    System.out.println( userId );
 } 
 
 /** 

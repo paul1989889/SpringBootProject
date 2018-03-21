@@ -59,7 +59,7 @@ public class UserController {
      * @return
      */
     @RequiresRoles("admin")
-    @RequiresPermissions("add")
+//    @RequiresPermissions("add")
     @RequestMapping(value = "/add" ,method = RequestMethod.GET)
     public String addUser(){
         return  "addUser";

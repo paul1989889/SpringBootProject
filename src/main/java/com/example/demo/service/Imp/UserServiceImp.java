@@ -41,7 +41,7 @@ public class UserServiceImp implements UserSerevice {
 
     @Override
     public String findUserIdByName(String userName) {
-        return userDao.findUserIdByName(userName);
+        return userDao.findIdByUserName(userName);
     }
 
     @Override
