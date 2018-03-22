@@ -1,6 +1,7 @@
 package com.example.demo.config;
 
 
+import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
@@ -10,6 +11,7 @@ import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.servlet.Cookie;
 import org.apache.shiro.web.servlet.SimpleCookie;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
@@ -46,18 +48,21 @@ public class ShiroConfiguration {
         filterChainDefinitionMap.put("/logout", "logout");
 //        //<!-- 过滤链定义，从上向下顺序执行，一般将/**放在最为下边 -->:这是一个坑呢，一不小心代码就不好使了;
 //        //<!-- authc:所有url都必须认证通过才可以访问; anon:所有url都都可以匿名访问-->
-//        filterChainDefinitionMap.put("/**", "authc");
+//        filterChainDefinitionMap.put("/**", "anon");
 
          shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
          return shiroFilterFactoryBean;
      }
 
-
+    /**
+     * 核心的安全事务管理器
+     * @return
+     */
      @Bean
     public SecurityManager securityManager(){
          DefaultWebSecurityManager securityManager=new DefaultWebSecurityManager ();
          //设置realm
-         securityManager.setRealm( myShiroRealm()  );
+         securityManager.setRealm( myShiroRealm(  )  );
          securityManager.setRememberMeManager(rememberMeManager());
          return securityManager;
      }
@@ -68,11 +73,42 @@ public class ShiroConfiguration {
      * @return
      */
     @Bean
-    public UserRealm myShiroRealm(){
+    public UserRealm myShiroRealm(  ){
         UserRealm myShiroRealm = new UserRealm();
+        myShiroRealm.setCredentialsMatcher(  hashedCredentialsMatcher() );
         return myShiroRealm;
     }
 
+    /**
+     * 配置自定义的密码比较器
+     * @return
+     */
+    @Bean
+    public CredentialsMatcher credentialsMatcher(){
+        return  new CredentialsMatcher();
+    }
+
+
+    /**
+     * 哈希密码比较器？如何使用呢？在myShiroRealm中作用参数使用
+     * @return
+     */
+    @Bean
+    public HashedCredentialsMatcher hashedCredentialsMatcher(){
+        HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
+        hashedCredentialsMatcher.setHashAlgorithmName("md5");//散列算法:这里使用MD5算法;
+        hashedCredentialsMatcher.setHashIterations(2);//散列的次数，比如散列两次，相当于 md5(md5(""));
+        return hashedCredentialsMatcher;
+    }
+
+//    //注入缓存
+//    @Bean
+//    public EhCacheManager ehCacheManager(){
+//        System.out.println("ShiroConfiguration.getEhCacheManager()执行");
+//        EhCacheManager cacheManager=new EhCacheManager();
+//        cacheManager.setCacheManagerConfigFile("classpath:config/ehcache-shiro.xml");
+//        return cacheManager;
+//    }
 
     /**
      * 记住我管理器
