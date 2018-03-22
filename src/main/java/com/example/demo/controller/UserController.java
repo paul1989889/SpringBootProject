@@ -58,8 +58,8 @@ public class UserController {
      *  管理员才有权限添加
      * @return
      */
-    @RequiresRoles("admin")
-//    @RequiresPermissions("add")
+//    @RequiresRoles("admin")
+    @RequiresPermissions("add")
     @RequestMapping(value = "/add" ,method = RequestMethod.GET)
     public String addUser(){
         return  "addUser";

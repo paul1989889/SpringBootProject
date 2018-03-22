@@ -26,7 +26,7 @@ import static org.apache.coyote.http11.Constants.a;
  */
 public class UserRealm extends AuthorizingRealm {
     @Resource(name = "userServiceImp")
-    private UserSerevice userSerevice;
+    private UserSerevice userService;
 
     private Logger logger=Logger.getLogger(UserRealm.class);
 
@@ -37,22 +37,23 @@ public class UserRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-        logger.info("--->授权认证：");
+        logger.info("---------------------------->授权认证：");
         SimpleAuthorizationInfo authorizationInfo=new SimpleAuthorizationInfo();
         String userName=(String) principals.getPrimaryPrincipal();
-        String userId=userSerevice.findUserIdByName(userName);
-        Set<SysUserRole> roleIdSet=userSerevice.findRoleIdByUid( Integer.parseInt(userId) );
+        String userId=userService.findUserIdByName(userName);
+        Set<SysUserRole> roleIdSet=userService.findRoleIdByUid( Integer.parseInt(userId) );
         Set<String> roleSet=new HashSet<>();
         Set<Integer>  pemissionIdSet=new HashSet<>();
         Set<String>  pemissionSet=new HashSet<>();
         for(SysUserRole roleInfo : roleIdSet) {
               int roleId=roleInfo.getRoleId();
-               roleSet.add( userSerevice.findRoleByRoleId( roleId  ) );
+               roleSet.add( userService.findRoleByRoleId( roleId  ) );
                //将拥有角色的所有权限放进Set里面，也就是求Set集合的并集
-              pemissionIdSet.addAll( userSerevice.findPermissionIdByRoleId(  roleId ));
+              pemissionIdSet.addAll( userService.findPermissionIdByRoleId(  roleId ));
         }
         for(int permissionId : pemissionIdSet) {
-            pemissionSet.add(  userSerevice.findPermissionById(permissionId).getName());
+            String permission= userService.findPermissionById( permissionId ).getPermission() ;
+            pemissionSet.add(  permission );
         }
          // 将角色名称提供给授权info
         authorizationInfo.setRoles( roleSet );
@@ -70,9 +71,9 @@ public class UserRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
-        logger.info("----->登陆验证:");
+        logger.info("---------------------------->登陆验证:");
         String userName=(String)authenticationToken.getPrincipal();
-        User user=userSerevice.findUserByName(userName);
+        User user=userService.findUserByName(userName);
         if(user==null) {
             //用户不存在就抛出异常
             throw new UnknownAccountException();

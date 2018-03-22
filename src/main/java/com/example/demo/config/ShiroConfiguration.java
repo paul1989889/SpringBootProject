@@ -102,7 +102,7 @@ public class ShiroConfiguration {
 
     /**
      *  开启shiro aop注解支持.
-     *  使用代理方式;所以需要开启代码支持;否则@RequiresRoles注解无法生效
+     *  使用代理方式;所以需要开启代码支持;否则@RequiresRoles等注解无法生效
      * @param securityManager
      * @return
      */
@@ -122,6 +122,10 @@ public class ShiroConfiguration {
         return new LifecycleBeanPostProcessor();
     }
 
+    /**
+     * 自动创建代理
+     * @return
+     */
     @Bean
     @DependsOn({"lifecycleBeanPostProcessor"})
     public DefaultAdvisorAutoProxyCreator advisorAutoProxyCreator(){

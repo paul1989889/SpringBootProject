@@ -20,6 +20,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import javax.annotation.Resource;
+import java.util.HashSet;
 import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
@@ -135,7 +136,22 @@ public void testFindRoleByRoleId() throws Exception {
 @Test
 public void testFindPermissionById() throws Exception { 
 //TODO: Test goes here...
-    System.out.println(  userService .findPermissionById(1).getPermission()   );
+    String userId=userService.findUserIdByName(userName);
+    Set<SysUserRole> roleIdSet=userService.findRoleIdByUid( Integer.parseInt(userId) );
+    Set<String> roleSet=new HashSet<>();
+    Set<Integer>  pemissionIdSet=new HashSet<>();
+    Set<String>  pemissionSet=new HashSet<>();
+    for(SysUserRole roleInfo : roleIdSet) {
+        int roleId=roleInfo.getRoleId();
+        roleSet.add( userService.findRoleByRoleId( roleId  ) );
+        //将拥有角色的所有权限放进Set里面，也就是求Set集合的并集
+        pemissionIdSet.addAll( userService.findPermissionIdByRoleId(  roleId ));
+    }
+    for(int permissionId : pemissionIdSet) {
+        String  permission=userService.findPermissionById(permissionId).getPermission();
+        System.out.println(permission);
+        pemissionSet.add(  permission  );
+    }
 } 
 
 
