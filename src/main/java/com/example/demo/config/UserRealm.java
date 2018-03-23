@@ -83,7 +83,10 @@ public class UserRealm extends AuthorizingRealm {
            throw new  LockedAccountException();
         }
         //此处的密码盐需要修复,不加入密码盐表示密码用明文
-        SimpleAuthenticationInfo authenticationInfo=new SimpleAuthenticationInfo(user.getUsername(),user.getPassword(),getName());
+        SimpleAuthenticationInfo authenticationInfo=new SimpleAuthenticationInfo(user.getUsername(),
+                user.getPassword(),
+                ByteSource.Util.bytes(user.getSalt())   ,             //salt=username+salt
+                getName());                   //realm name
 
         return authenticationInfo;
     }

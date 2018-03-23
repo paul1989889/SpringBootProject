@@ -30,12 +30,12 @@ create table sys_user_role(
 
 create table user_info(
  uid char(20) not null primary key ,
-  username char(20) not null,
-  name char(20) not null,
-  password char(20) not null,
-  salt char(20) not null,
-  state char(20) not null
- );
+ username char(20) not null,
+ name char(20) not null,
+ password char(50) not null,
+ salt char(50) not null,
+ state char(20) not null
+);
 
 
 INSERT INTO `sys_permission` (`id`,`available`,`name`,`parent_id`,`parent_ids`,`permission`,`resource_type`,`url`) VALUES (1,0,'用户管理',0,'0/','userInfo:view','menu','userInfo/userList');
@@ -53,7 +53,7 @@ INSERT INTO `sys_role_permission` (`permission_id`,`role_id`) VALUES (3,1);
 INSERT INTO `sys_user_role` (`role_id`,`uid`) VALUES (1,1);
 INSERT INTO `sys_user_role` (`role_id`,`uid`) VALUES (2,2);
 
-INSERT INTO `user_info` (`uid`,`username`,`name`,`password`,`salt`,`state`) VALUES ('1', 'admin', '管理员', '123456', '8d78869f470951332959580424d4bf4f', 0);
-INSERT INTO `user_info` (`uid`,`username`,`name`,`password`,`salt`,`state`) VALUES ('2', 'staff', '职工', '123456', ' ', 0);
+INSERT INTO `user_info` (`uid`,`username`,`name`,`password`,`salt`,`state`) VALUES ('1', 'admin', '管理员', 'd3c59d25033dbf980d29554025c23a75', '8d78869f470951332959580424d4bf4f', 0);
+INSERT INTO `user_info` (`uid`,`username`,`name`,`password`,`salt`,`state`) VALUES ('2', 'vip', '会员', '123456', '9WwP67Pxaga1m5jXPEI2bQ== ', 0);
 
 
