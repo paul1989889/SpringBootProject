@@ -1,7 +1,9 @@
 package com.example.demo.config;
 
 
+import org.apache.log4j.Logger;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
+import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
@@ -25,6 +27,7 @@ import java.util.Map;
  */
 @Configuration
 public class ShiroConfiguration {
+    private Logger logger=Logger.getLogger(ShiroConfiguration.class);
 
     @Bean
      public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager){
@@ -56,6 +59,7 @@ public class ShiroConfiguration {
 
     /**
      * 核心的安全事务管理器
+     * 设置realm、cacheManager等
      * @return
      */
      @Bean
@@ -64,6 +68,7 @@ public class ShiroConfiguration {
          //设置realm
          securityManager.setRealm( myShiroRealm(  )  );
          securityManager.setRememberMeManager(rememberMeManager());
+         securityManager.setCacheManager( ehCacheManager() );
          return securityManager;
      }
 
@@ -102,14 +107,19 @@ public class ShiroConfiguration {
         return hashedCredentialsMatcher;
     }
 
-//    //注入缓存
-//    @Bean
-//    public EhCacheManager ehCacheManager(){
-//        System.out.println("ShiroConfiguration.getEhCacheManager()执行");
-//        EhCacheManager cacheManager=new EhCacheManager();
-//        cacheManager.setCacheManagerConfigFile("classpath:config/ehcache-shiro.xml");
-//        return cacheManager;
-//    }
+    /**
+     *  shiro缓存管理器;
+     * 需要注入对应的其它的实体类中: 安全管理器：securityManager
+     * 可见securityManager是整个shiro的核心；
+     * @return
+     */
+    @Bean
+    public EhCacheManager ehCacheManager(){
+        logger.info("------------->ShiroConfiguration.getEhCacheManager()执行");
+        EhCacheManager cacheManager=new EhCacheManager();
+        cacheManager.setCacheManagerConfigFile("classpath:ehcache-shiro.xml");
+        return cacheManager;
+    }
 
     /**
      * 记住我管理器
