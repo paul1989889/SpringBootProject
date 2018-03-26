@@ -82,10 +82,11 @@ public class UserRealm extends AuthorizingRealm {
            //用户被锁定就抛异常
            throw new  LockedAccountException();
         }
-        //此处的密码盐需要修复,不加入密码盐表示密码用明文
+        //密码可以通过SimpleHash加密，然后保存进数据库。
+        //此处是获取数据库内的账号、密码、盐值，保存到登陆信息info中
         SimpleAuthenticationInfo authenticationInfo=new SimpleAuthenticationInfo(user.getUsername(),
                 user.getPassword(),
-                ByteSource.Util.bytes(user.getSalt())   ,             //salt=username+salt
+                ByteSource.Util.bytes(user.getSalt())   ,
                 getName());                   //realm name
 
         return authenticationInfo;

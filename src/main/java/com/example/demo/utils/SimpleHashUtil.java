@@ -1,5 +1,7 @@
 package com.example.demo.utils;
 
+import org.apache.shiro.crypto.RandomNumberGenerator;
+import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.crypto.hash.SimpleHash;
 
 /**
@@ -12,7 +14,7 @@ public class SimpleHashUtil {
      */
     public static void main(String[] args) {
         int hashIterations = 2;    //加密的次数
-        Object salt = "saltvip";   //盐值
+        Object salt = "saltvip";   //盐值,此处为了简便设置。更精准的做法是randomNumberGenerator生成随机数
         Object credentials = "123456";   //密码
         String hashAlgorithmName = "MD5";   //加密方式
         Object simpleHash = new SimpleHash(hashAlgorithmName, credentials,
