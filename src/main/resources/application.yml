@@ -3,8 +3,6 @@ spring:
          url: jdbc:mysql://localhost:3306/shiro
          username: root
          password: root
-
-
   thymeleaf:
          cache: true
          check-template-location: true
@@ -14,7 +12,10 @@ spring:
          mode: HTML5
          prefix: classpath:/templates/
          suffix: .html
-
+# 为什么下面的cache配置路径加上classpath*:就总是无法启动呢？
+  cache:
+        ehcache:
+          config:  ehcache.xml
 debug:
    true
 mybatis:
