@@ -15,8 +15,13 @@ spring:
 # 为什么下面的cache配置路径加上classpath*:就总是无法启动呢？
   cache:
         ehcache:
-          config:  ehcache.xml
+          config:  classpath:/ehcache.xml
 debug:
    true
 mybatis:
-  mapper-locations: classpath*:mapping/*Mapper.xml
+  mapper-locations:  classpath:/mapping/*Mapper.xml
+# 打印sql
+logging:
+  level:
+     com.example.demo.dao : debug
+
