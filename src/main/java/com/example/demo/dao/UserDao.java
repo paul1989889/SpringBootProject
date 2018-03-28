@@ -5,7 +5,7 @@ import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 
 
-@CacheConfig(cacheNames = "users")
+
 public interface UserDao {
     int deleteByPrimaryKey(String uid);
 
@@ -21,6 +21,5 @@ public interface UserDao {
 
     String findIdByUserName(String userName);
 
-    @Cacheable
     User findUserByUserName(String userName);
 }

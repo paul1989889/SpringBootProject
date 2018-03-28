@@ -6,6 +6,8 @@ import com.example.demo.pojo.SysUserRole;
 import com.example.demo.pojo.User;
 import com.example.demo.service.UserSerevice;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,6 +18,7 @@ import java.util.Set;
  */
 
 @Service
+@CacheConfig(cacheNames = "users")
 public class UserServiceImp implements UserSerevice {
 
     @Autowired
@@ -29,6 +32,7 @@ public class UserServiceImp implements UserSerevice {
     @Autowired
     private SysPermissionDao permissionDao;
 
+    @Cacheable
     @Override
     public User findUserByName(String name) {
         return userDao.findUserByUserName(name);
