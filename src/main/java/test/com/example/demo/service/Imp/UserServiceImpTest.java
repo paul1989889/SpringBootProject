@@ -1,23 +1,15 @@
 package test.com.example.demo.service.Imp; 
 
 import com.example.demo.SpringBootDemoApplication;
-import com.example.demo.pojo.SysRole;
 import com.example.demo.pojo.SysUserRole;
 import com.example.demo.pojo.User;
-import com.example.demo.service.Imp.UserServiceImp;
 import com.example.demo.service.UserSerevice;
 import org.junit.Test;
 import org.junit.Before; 
 import org.junit.After;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
 
 import javax.annotation.Resource;
 import java.util.HashSet;

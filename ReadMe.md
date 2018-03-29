@@ -6,10 +6,12 @@
 5.过滤器filter进行url过滤，设置访问权限     <br>
 
 一.待添加功能：    <br>
-1.Shiro框架,Druid数据库连接池，MD5加密    <br>
-2.后端模板freemaker、Thymeleaf等    <br>
-3.集成redis缓存.   <br>
-4.添加mybatis的日志.   <br>
+1.Shiro框架,，MD5加密 (完成)    <br>
+2.后端模板freemaker、Thymeleaf等 (完成 )   <br>
+3.集成redis缓存.ehcache缓存   <br>
+4.添加mybatis的日志.(完成)   <br>
+5.Druid数据库连接池    <br>
+6.SpringCloud等服务  <br>
 二.遇到的障碍：    <br>
 1.Mybatis找不到生成的Mapper对应的Class文件，需要配置Mybatis属性    <br>
 2.Spring依赖注入，@Autowired和@Resource的细节 .@Autowired按类型注入，@Resource按名称注入   <br>
@@ -23,5 +25,6 @@
 7.UserRealm中注入service对象报空指针?    <br>
 原因是在ShiroConfig中，没有注入realm  <br>
 8.shiro过滤器filterChainDefinitionMap，具体如何配置？   <br>
+ShiroConfiguration中注入过滤链。根据url过滤   <br>
 9.shiro的注解@RequiresRoles("admin")不起作用，非管理员怎么也可以登陆？   <br>
 需要在ShiroConfiguration中添加支持aop、代理的bean
