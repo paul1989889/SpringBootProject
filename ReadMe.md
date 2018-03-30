@@ -4,6 +4,7 @@
 3.加强单元测试的运用，断言,配合SpringBoot的注解    <br>
 4.了解shiro、redis等框架     <br>
 5.过滤器filter进行url过滤，设置访问权限     <br>
+6.熟悉mysql的外键、join、union   <br>
 
 一.待添加功能：    <br>
 1.Shiro框架,，MD5加密 (完成)    <br>
@@ -27,4 +28,5 @@
 8.shiro过滤器filterChainDefinitionMap，具体如何配置？   <br>
 ShiroConfiguration中注入过滤链。根据url过滤   <br>
 9.shiro的注解@RequiresRoles("admin")不起作用，非管理员怎么也可以登陆？   <br>
-需要在ShiroConfiguration中添加支持aop、代理的bean
+需要在ShiroConfiguration中添加支持aop、代理的bean   <br>
+10.Ehcache缓存注解不起作用.(折腾好久还是没解决。)
