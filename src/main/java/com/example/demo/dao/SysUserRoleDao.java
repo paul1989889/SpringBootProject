@@ -1,6 +1,7 @@
 package com.example.demo.dao;
 
 import com.example.demo.pojo.SysUserRole;
+import com.example.demo.pojo.User;
 
 import java.util.List;
 import java.util.Set;
@@ -19,4 +20,7 @@ public interface SysUserRoleDao {
     int updateByPrimaryKey(SysUserRole record);
 
     Set<SysUserRole> findRoleIdByUid(int uid);
+
+//    级联查询.通过RoleId查找对应的User信息
+    SysUserRole findUserByRoleId(int roleId);
 }

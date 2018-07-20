@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.example.demo.pojo.User" >
     <constructor >
       <idArg column="uid" jdbcType="CHAR" javaType="java.lang.String" />
-      <arg column="username" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="userName" jdbcType="CHAR" javaType="java.lang.String" />
       <arg column="name" jdbcType="CHAR" javaType="java.lang.String" />
       <arg column="password" jdbcType="CHAR" javaType="java.lang.String" />
       <arg column="salt" jdbcType="CHAR" javaType="java.lang.String" />
@@ -12,16 +12,38 @@
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    uid, username, name, password, salt, state
+    uid, userName, name, password, salt, state
   </sql>
 
+  <!--   一对多关联查询  -->
+  <resultMap id="userRoleIdMap" type="com.example.demo.pojo.User" >
+    <id column="uid" property="uid" />
+    <result   column="userName" property="userName" />
+    <result column="name" property="name" />
+    <result column="password" property="password" />
+    <result column="salt" property="salt" />
+    <result column="state"  property="state"/>
+
+    <collection property="roleIdList" ofType="com.example.demo.pojo.SysUserRole" >
+         <id  column="role_id" property="roleId"/>
+         <result   column="uid" property="uid" />
+    </collection>
+  </resultMap>
+  <select id="findRoleIdByUserName"  resultMap="userRoleIdMap"  parameterType="java.lang.String">
+     SELECT  a.userName,a.name,b.uid,b.role_id   FROM  user_info a
+     INNER JOIN sys_user_role b
+     ON  a.uid=b.uid
+     WHERE  a.userName=#{userName}
+  </select>
+
+
   <select id="findIdByUserName" resultType="java.lang.String" parameterType="java.lang.String" >
-      select uid  from user_info where username=#{userName }
+      select uid  from user_info where userName=#{userName }
   </select>
 
   <select id="findUserByUserName" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select  <include refid="Base_Column_List" />
-    from user_info where username=#{userName }
+    from user_info where userName=#{userName }
   </select>
 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
@@ -35,9 +57,9 @@
     where uid = #{uid,jdbcType=CHAR}
   </delete>
   <insert id="insert" parameterType="com.example.demo.pojo.User" >
-    insert into user_info (uid, username, name, password, 
+    insert into user_info (uid, userName, name, password,
       salt, state)
-    values (#{uid,jdbcType=CHAR}, #{username,jdbcType=CHAR}, #{name,jdbcType=CHAR}, #{password,jdbcType=CHAR}, 
+    values (#{uid,jdbcType=CHAR}, #{userName,jdbcType=CHAR}, #{name,jdbcType=CHAR}, #{password,jdbcType=CHAR},
       #{salt,jdbcType=CHAR}, #{state,jdbcType=CHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.example.demo.pojo.User" >
@@ -46,8 +68,8 @@
       <if test="uid != null" >
         uid,
       </if>
-      <if test="username != null" >
-        username,
+      <if test="userName != null" >
+        userName,
       </if>
       <if test="name != null" >
         name,
@@ -66,8 +88,8 @@
       <if test="uid != null" >
         #{uid,jdbcType=CHAR},
       </if>
-      <if test="username != null" >
-        #{username,jdbcType=CHAR},
+      <if test="userName != null" >
+        #{userName,jdbcType=CHAR},
       </if>
       <if test="name != null" >
         #{name,jdbcType=CHAR},
@@ -86,8 +108,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.pojo.User" >
     update user_info
     <set >
-      <if test="username != null" >
-        username = #{username,jdbcType=CHAR},
+      <if test="userName != null" >
+        userName = #{userName,jdbcType=CHAR},
       </if>
       <if test="name != null" >
         name = #{name,jdbcType=CHAR},
@@ -106,7 +128,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.example.demo.pojo.User" >
     update user_info
-    set username = #{username,jdbcType=CHAR},
+    set userName = #{userName,jdbcType=CHAR},
       name = #{name,jdbcType=CHAR},
       password = #{password,jdbcType=CHAR},
       salt = #{salt,jdbcType=CHAR},

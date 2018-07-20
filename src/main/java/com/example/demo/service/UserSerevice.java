@@ -14,12 +14,14 @@ import java.util.Set;
  */
 
 public interface UserSerevice {
-    public User findUserByName(String userName);
+      User findUserByName(String userName);
+      User showUsers(String uid);
+      String findUserIdByName(String userName);
+      Set<SysUserRole> findRoleIdByUid(int uid);
+      Set<Integer> findPermissionIdByRoleId(int roleId);
+      String findRoleByRoleId(int roleId);
+      SysPermission findPermissionById(int id);
+      User findRoleIdByUserName(String userName);
 
-    public User showUsers(String uid);
-    public String findUserIdByName(String userName);
-    public Set<SysUserRole> findRoleIdByUid(int uid);
-    public Set<Integer> findPermissionIdByRoleId(int roleId);
-    public  String findRoleByRoleId(int roleId);
-    public SysPermission findPermissionById(int id);
+
 }

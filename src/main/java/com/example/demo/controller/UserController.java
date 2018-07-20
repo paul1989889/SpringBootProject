@@ -19,7 +19,7 @@ public class UserController {
      * 这里的注解运用了自动装配@Autowired和指定名称@Qualifier，效果相当于@Resource(name = "userServiceImpl")
      */
    @Autowired
-   @Qualifier("userServiceImp")
+   @Qualifier("userServiceImpl")
     private UserSerevice userService;
 
 

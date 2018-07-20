@@ -30,7 +30,7 @@ create table sys_user_role(
 
 create table user_info(
  uid char(20) not null primary key ,
- username char(20) not null,
+ userName char(20) not null,
  name char(20) not null,
  password char(50) not null,
  salt char(50) not null,
@@ -52,8 +52,14 @@ INSERT INTO sys_role_permission (`permission_id`,`role_id`) VALUES (3,1);
 
 INSERT INTO sys_user_role (`role_id`,`uid`) VALUES (1,1);
 INSERT INTO sys_user_role (`role_id`,`uid`) VALUES (2,2);
+INSERT INTO sys_user_role (`role_id`,`uid`) VALUES (2,1);
 
-INSERT INTO user_info (`uid`,`username`,`name`,`password`,`salt`,`state`) VALUES ('1', 'admin', '管理员', '4f251ab52c7b431254a7adc8ea31724b', 'saltadmin', 0);
-INSERT INTO user_info  (`uid`,`username`,`name`,`password`,`salt`,`state`) VALUES ('2', 'vip', '会员', 'e1e34dfbc204ba288b6645caad95babe', 'saltvip', 0);
+INSERT INTO user_info (`uid`,`userName`,`name`,`password`,`salt`,`state`) VALUES ('1', 'admin', '管理员', '4f251ab52c7b431254a7adc8ea31724b', 'saltadmin', 0);
+INSERT INTO user_info  (`uid`,`userName`,`name`,`password`,`salt`,`state`) VALUES ('2', 'vip', '会员', 'e1e34dfbc204ba288b6645caad95babe', 'saltvip', 0);
 
 
+##一对多关联查询
+SELECT  a.userName,a.name,b.role_id   FROM  user_info a
+INNER JOIN sys_user_role b
+ ON  a.uid=b.uid
+WHERE  a.uid=1  ;

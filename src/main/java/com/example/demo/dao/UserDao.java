@@ -4,6 +4,7 @@ import com.example.demo.pojo.User;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 
+import java.util.List;
 
 
 public interface UserDao {
@@ -22,4 +23,8 @@ public interface UserDao {
     String findIdByUserName(String userName);
 
     User findUserByUserName(String userName);
+
+    User findRoleIdByUserName(String userName);
+
+    List<User> findUserByRoleId(String roleId);
 }

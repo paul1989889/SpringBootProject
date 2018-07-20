@@ -12,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 
@@ -22,7 +21,7 @@ import javax.annotation.Resource;
 //@RestController
 @Controller
 public class LoginController {
-    @Resource(name="userServiceImp")
+    @Resource(name= "userServiceImpl")
     private UserSerevice userSerevice;
 
     /**

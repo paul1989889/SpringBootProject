@@ -1,6 +1,5 @@
 package com.example.demo.config;
 
-import com.example.demo.pojo.SysPermission;
 import com.example.demo.pojo.SysUserRole;
 import com.example.demo.pojo.User;
 import com.example.demo.service.UserSerevice;
@@ -14,18 +13,14 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
-
-import static org.apache.coyote.http11.Constants.a;
 
 /**
  * Created by lenovo on  三月
  */
 public class UserRealm extends AuthorizingRealm {
-    @Resource(name = "userServiceImp")
+    @Resource(name = "userServiceImpl")
     private UserSerevice userService;
 
     private Logger logger=Logger.getLogger(UserRealm.class);
@@ -84,7 +79,7 @@ public class UserRealm extends AuthorizingRealm {
         }
         //密码可以通过SimpleHash加密，然后保存进数据库。
         //此处是获取数据库内的账号、密码、盐值，保存到登陆信息info中
-        SimpleAuthenticationInfo authenticationInfo=new SimpleAuthenticationInfo(user.getUsername(),
+        SimpleAuthenticationInfo authenticationInfo=new SimpleAuthenticationInfo(user.getUserName(),
                 user.getPassword(),
                 ByteSource.Util.bytes(user.getSalt())   ,
                 getName());                   //realm name

@@ -13,6 +13,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -21,7 +22,7 @@ import java.util.Set;
 
 @Service
 @CacheConfig
-public class UserServiceImp implements UserSerevice {
+public class UserServiceImpl implements UserSerevice {
     @Autowired
     private CacheManager cacheManager;
 
@@ -79,4 +80,11 @@ public class UserServiceImp implements UserSerevice {
     public SysPermission findPermissionById(int id) {
         return permissionDao.findPermissionById(id);
     }
+
+    @Override
+    public User findRoleIdByUserName(String userName) {
+        return userDao.findRoleIdByUserName(userName);
+    }
+
+
 }

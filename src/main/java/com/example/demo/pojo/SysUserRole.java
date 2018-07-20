@@ -1,13 +1,25 @@
 package com.example.demo.pojo;
 
+import java.util.List;
+
 public class SysUserRole {
     private Integer roleId;
 
     private Integer uid;
 
+    private List<User> userIdList;
+
     public SysUserRole(Integer roleId, Integer uid) {
         this.roleId = roleId;
         this.uid = uid;
+    }
+
+    public List<User> getUserIdList() {
+        return userIdList;
+    }
+
+    public void setUserIdList(List<User> userIdList) {
+        this.userIdList = userIdList;
     }
 
     public SysUserRole() {

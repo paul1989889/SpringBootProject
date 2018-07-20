@@ -3,16 +3,19 @@ package test.com.example.demo.service.Imp;
 import com.example.demo.SpringBootDemoApplication;
 import com.example.demo.pojo.SysUserRole;
 import com.example.demo.pojo.User;
+import com.example.demo.service.UserRoleService;
 import com.example.demo.service.UserSerevice;
 import org.junit.Test;
 import org.junit.Before; 
 import org.junit.After;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.annotation.Resource;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
@@ -28,8 +31,10 @@ import static org.junit.Assert.assertEquals;
 @SpringBootTest(classes = SpringBootDemoApplication.class)
 public class UserServiceImpTest {
 
-    @Resource(name = "userServiceImp")
+    @Resource(name = "userServiceImpl")
     private UserSerevice userService;
+    @Autowired
+    private UserRoleService userRoleService;
 
     private String userName="admin";
     private String id="1";
@@ -145,6 +150,26 @@ public void testFindPermissionById() throws Exception {
         pemissionSet.add(  permission  );
     }
 } 
+
+@Test
+  public  void testFindRoleIdByUserId()  {
+    User user=userService.findRoleIdByUserName("admin");
+    assertEquals("管理员",user.getName());
+    List<SysUserRole> userRoleList=user.getRoleIdList();
+    for(SysUserRole sysUserRole: userRoleList) {
+        System.out.println("uid:"+sysUserRole.getUid()+" ,roleId:"+sysUserRole.getRoleId());
+    }
+  }
+
+  @Test
+  public  void testFindUserByRoleId() {
+    SysUserRole sysUserRole=userRoleService.findUserByRoleId(1);
+    List<User> userList=sysUserRole.getUserIdList();
+    for(User user : userList) {
+        System.out.println(user.getName()+",userName:"+user.getUserName()+",userId"+user.getUid());
+    }
+
+  }
 
 
 } 
