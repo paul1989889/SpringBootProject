@@ -26,5 +26,5 @@ public interface UserDao {
 
     User findRoleIdByUserName(String userName);
 
-    List<User> findUserByRoleId(String roleId);
+//    List<User> findUserByRoleId(String roleId);
 }

@@ -11,6 +11,7 @@ import org.junit.After;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.stereotype.Component;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.annotation.Resource;
@@ -27,13 +28,19 @@ import static org.junit.Assert.assertEquals;
 * @since <pre>03/15/2018</pre> 
 * @version 1.0 
 */
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = SpringBootDemoApplication.class)
 public class UserServiceImpTest {
 
     @Resource(name = "userServiceImpl")
     private UserSerevice userService;
-    @Autowired
+
+//    该单元测试类不属于Spring管理。无法使用@Autowired注解
+//    @Autowired
+//    private UserRoleService userRoleService;
+
+    @Resource(name = "userRoleServiceImpl")
     private UserRoleService userRoleService;
 
     private String userName="admin";

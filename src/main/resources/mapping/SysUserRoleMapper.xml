@@ -14,9 +14,7 @@
   <resultMap id="userRoleIdMap" type="com.example.demo.pojo.SysUserRole" >
       <id property="roleId" column="role_id" />
       <result property="uid" column="uid" />
-    <!--collection关联查询，并采用延迟加载进行处理-->
-      <!--<collection property="userIdList" column="uid" fetchType="lazy"-->
-                  <!--select="com.example.demo.dao.UserDao.findUserByRoleId"   />-->
+    <!--collection关联查询-->
           <collection property="userIdList" ofType="com.example.demo.pojo.User">
                <id column="uid" property="uid" />
                <result column="userName" property="userName" />
@@ -25,13 +23,9 @@
   </resultMap>
   <!--多对多查询-->
   <select id="findUserByRoleId" resultMap="userRoleIdMap"  parameterType="java.lang.Integer">
---       select b.uid,b.username,b.name
---        from sys_user_role a,user_info b
---        where a.uid=b.uid and a.role_id=#{ roleId }
-     select b.uid,b.username,b.name
-       from user_info b
-	   inner join    sys_user_role a
-       where a.uid=b.uid and a.role_id=#{roleId}
+      select b.uid,b.username,b.name
+       from sys_user_role a,user_info b
+       where a.uid=b.uid and a.role_id=#{ roleId }
   </select>
 
 
