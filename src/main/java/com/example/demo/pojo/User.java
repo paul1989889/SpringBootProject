@@ -1,8 +1,11 @@
 package com.example.demo.pojo;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class User {
+public class User implements Serializable {
+    private static final long serialVersionUID = 4798316249512579846L;
+
     private String uid;
     //帐号
     private String userName;

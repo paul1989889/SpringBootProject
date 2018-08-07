@@ -15,6 +15,17 @@ spring:
   cache:
         ehcache:
           config:  classpath:/ehcache.xml
+  redis:
+    database: 0
+    host: localhost
+    port: 6379
+    password:
+    pool:
+         max-active: 8
+         max-wait: -1
+         max-idle: 8
+         min-idle: 0
+    timeout: 0
 debug:
    true
 mybatis:
@@ -23,4 +34,9 @@ mybatis:
 logging:
   level:
      com.example.demo.dao : debug
+     com.example.demo.controller: debug
+
+
+
+
 
