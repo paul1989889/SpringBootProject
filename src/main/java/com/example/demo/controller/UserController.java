@@ -2,8 +2,9 @@ package com.example.demo.controller;
 
 import com.example.demo.pojo.User;
 import com.example.demo.service.UserSerevice;
-import org.apache.log4j.Logger;
+
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -31,7 +32,7 @@ public class UserController {
    @Autowired
    private RedisTemplate redisTemplate;
 
-   private static final org.slf4j.Logger logger = LoggerFactory.getLogger(UserController.class);
+   private static final Logger logger = LoggerFactory.getLogger(UserController.class);
     /**
      * 根据用户名显示用户信息
      * @param name

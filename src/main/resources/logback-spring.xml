@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/base.xml"/> <!-- logback 提供的基本配置 -->
+
+    <!-- 控制台 -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <Pattern>[%-5level] %d{yyyy-MM-dd HH:mm:ss} %logger{36} %line: %msg %n</Pattern>   <!-- 输出格式 -->
+            <charset>UTF-8</charset> <!-- 解决中文乱码问题 -->
+        </encoder>
+    </appender>
+
+    <!--log文件-->
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+     　<file>log.log</file>
+       <append>true</append>
+       <encoder>
+        　 　<pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] [%-5level] %logger{35} - %msg%n</pattern>
+             <charset>UTF-8</charset> <!-- 解决中文乱码问题 -->
+       </encoder>
+    </appender>
+
+    <!--  记录到文件 (每天一个文件)  -->
+    <!--<appender name="dailyRollingFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
+        <!--<File>log/spring-boot-blog.log</File>   &lt;!&ndash; 最新的log文件名 &ndash;&gt;-->
+        <!--<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">-->
+            <!--<FileNamePattern>log/spring-boot-project.%d{yyyy-MM-dd}.log</FileNamePattern>  &lt;!&ndash; 历史文件名 &ndash;&gt;-->
+            <!--<maxHistory>30</maxHistory> &lt;!&ndash; 保留 30 天的日志 &ndash;&gt;-->
+        <!--</rollingPolicy>-->
+        <!--<encoder>-->
+            <!--<Pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{35} : %n %msg %n</Pattern>-->
+            <!--<charset>UTF-8</charset>  &lt;!&ndash;解决中文乱码问题&ndash;&gt;-->
+        <!--</encoder>-->
+    <!--</appender>-->
+
+    <!-- 将上面两个 appender 关联到我们的项目 -->
+    <logger name="com.example.demo" level="DEBUG" additivity="false"> <!-- name 是项目包名，为了方便调试，输出 DEBUG 级别及其以上的log -->
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE" />
+        <!--<appender-ref ref="dailyRollingFileAppender" />-->
+    </logger>
+
+    <!-- 其他框架的日志输出 -->
+    <property name="LOG_FILE" value="log/spring-boot-tmp.log" />
+    <logger name="org.springframework.web" level="INFO"/>   <!-- spring web 包下的 logger, 只输出 INFO 级别的 -->
+    <logger name="org.springframework.boot.web.filter" level="INFO"/>
+</configuration>

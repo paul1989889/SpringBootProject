@@ -30,11 +30,14 @@ debug:
    true
 mybatis:
   mapper-locations:  classpath:/mapping/*Mapper.xml
-# 打印sql
+
 logging:
+# 打印sql
   level:
      com.example.demo.dao : debug
-     com.example.demo.controller: debug
+#     com.example.demo.controller: debug
+
+
 
 
 
