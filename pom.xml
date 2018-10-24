@@ -37,7 +37,11 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-			<version>1.5.7.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-eureka-server</artifactId>
 		</dependency>
 
 		<dependency>
@@ -53,12 +57,11 @@
 		<dependency>
 			<groupId>org.mybatis.spring.boot</groupId>
 			<artifactId>mybatis-spring-boot-starter</artifactId>
-			<version>1.0.0</version>
+            <version>1.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-cache</artifactId>
-			<version>1.5.7.RELEASE</version>
 		</dependency>
 
 		<dependency>
@@ -72,11 +75,11 @@
 			<version>1.5.7.RELEASE</version>
 			<scope>test</scope>
 		</dependency>
-		<!-- 访问jsp页面所需要的以下依赖包 -->
-		<dependency>
+
+ 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
-			<scope>provided</scope>
+			<scope>compile</scope>
 		</dependency>
 		<dependency>
 		    <groupId>org.apache.tomcat.embed</groupId>
@@ -124,14 +127,14 @@
 		<!--</dependency>-->
 
 		<dependency>
-			　 <groupId>ch.qos.logback</groupId>
-			   <artifactId>logback-core</artifactId>
-			 　<version>${logback.version}</version>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>${logback.version}</version>
 	    </dependency>
 		 <dependency>
-		　　　 <groupId>ch.qos.logback</groupId>
-		　　　 <artifactId>logback-classic</artifactId>
-		　　　 <version>${logback.version}</version>
+             <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
 	   </dependency>
 
 		<dependency>
@@ -162,6 +165,19 @@
 		</dependency>
 
 	</dependencies>
+
+	<!--指定springCloud版本-->
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>Dalston.SR1</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 	<build>
 		<!--<plugins>-->

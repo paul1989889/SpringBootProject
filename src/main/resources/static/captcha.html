@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+</head>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script type="application/javascript" >
+    function refresh() {
+         var url="/createCode ";
+         $("#img").attr("src",url);
+    }
+
+    function loginDate() {
+       var code= $("#code").val();
+       $.ajax({
+           url: "/checkLogin" ,
+           type: "post" ,
+           async : false ,
+           data : {code : code} ,            //url中的参数
+           success : function (msg) {        //  msg表示的是访问url成功后服务器返回的数据
+                if(data=="trueCode") {
+                       window.location.href="/index";
+                }else {
+                    $("#error").text("验证码输入错误，请重新填写");
+                }
+
+           }
+       });
+
+    }
+
+</script>
+<body>
+       <p>验证码</p>
+       <input type="code" id="code" name="code" />
+       <!--跳到Controller层createCode方法里获取随机数和图片-->
+       <img id="img" src="/createCode" onclick="refresh()" /> <br/>
+
+      <input type="submit" name="button" value="登录" onclick="loginDate();"/>
+       <span id="error" style="color: red"></span>
+
+
+</body>
+</html>

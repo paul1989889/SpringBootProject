@@ -5,14 +5,19 @@
 4.了解shiro、redis等框架     <br>
 5.过滤器filter进行url过滤，设置访问权限     <br>
 6.熟悉mysql的外键、join、union   <br>
+7.Controller层最好不要写太多逻辑。业务逻辑全放在Service才比较规范  <br>
+8.SpringBoot不太建议使用xml配置。尽可能在application.yml或者用java代码配置。 <br>
+
 
 一.待添加功能：    <br>
 1.Shiro框架,，MD5加密 (完成)    <br>
 2.后端模板freemaker、Thymeleaf等 (完成 )   <br>
-3.集成redis缓存.ehcache缓存   <br>
+3.集成redis缓存。(完成)  ehcache缓存   <br>
 4.添加mybatis的日志.(完成)   <br>
 5.Druid数据库连接池    <br>
-6.SpringCloud等服务  <br>
+6.mybatis-plus。 <br>
+
+
 二.遇到的障碍：    <br>
 1.Mybatis找不到生成的Mapper对应的Class文件，需要配置Mybatis属性    <br>
 2.Spring依赖注入，@Autowired和@Resource的细节 .@Autowired按类型注入，@Resource按名称注入   <br>
@@ -29,4 +34,6 @@
 ShiroConfiguration中注入过滤链。根据url过滤   <br>
 9.shiro的注解@RequiresRoles("admin")不起作用，非管理员怎么也可以登陆？   <br>
 需要在ShiroConfiguration中添加支持aop、代理的bean   <br>
-10.Ehcache缓存注解不起作用.(折腾好久还是没解决。)
+10.Ehcache缓存注解不起作用.(折腾好久还是没解决。)  <br>
+可能是缓存起作用了。只是忘了打log而已。问题定位不准确。 <br>
+11.账号：admin   密码：123456  <br>
